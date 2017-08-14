@@ -48,9 +48,6 @@ document.getElementById('1-1').onclick = function () {
     generateWinner(topHorizontal);
     generateWinner(firstVertical);
     generateWinner(firstDiagonal);
-    console.log('topHorizontal', topHorizontal);
-    console.log('firstVertical', firstVertical);
-    console.log('firstDiagonal', firstDiagonal);
   } 
 }
 
@@ -64,8 +61,6 @@ document.getElementById('1-2').onclick = function () {
     history.push(value); 
     generateWinner(topHorizontal);
     generateWinner(secondVertical);
-    console.log('topHorizontal', topHorizontal);
-    console.log('secondVertical', secondVertical);
   } 
 }
 
@@ -81,9 +76,6 @@ document.getElementById('1-3').onclick = function () {
     generateWinner(topHorizontal); 
     generateWinner(thirdVertical);
     generateWinner(secondDiagonal);
-    console.log('topHorizontal', topHorizontal);
-    console.log('thirdVertical', thirdVertical);
-    console.log('secondDiagonal', secondDiagonal);
   }
 }
 
@@ -97,8 +89,6 @@ document.getElementById('2-1').onclick = function () {
     history.push(value); 
     generateWinner(firstVertical);
     generateWinner(secondHorizontal);
-    console.log('secondHorizontal', secondHorizontal);
-    console.log('firstVertical', firstVertical);
   }
 }
 
@@ -116,10 +106,6 @@ document.getElementById('2-2').onclick = function () {
     generateWinner(secondHorizontal);
     generateWinner(secondVertical); 
     generateWinner(secondDiagonal);
-    console.log('secondHorizontal', secondHorizontal);
-    console.log('secondVertical', secondVertical);
-    console.log('secondDiagonal', secondDiagonal);
-    console.log('firstDiagonal', firstDiagonal);
   }
 }
 
@@ -133,8 +119,6 @@ document.getElementById('2-3').onclick = function () {
     history.push(value); 
     generateWinner(secondHorizontal);
     generateWinner(thirdVertical); 
-    console.log('secondHorizontal', secondHorizontal);
-    console.log('thirdVertical', thirdVertical);
   }
 }
 
@@ -150,9 +134,6 @@ document.getElementById('3-1').onclick = function () {
     generateWinner(thirdHorizontal);
     generateWinner(firstVertical); 
     generateWinner(secondDiagonal);
-    console.log('thirdHorizontal', thirdHorizontal);
-    console.log('firstVertical', firstVertical);
-    console.log('secondDiagonal', secondDiagonal);
   }
 }
 
@@ -166,8 +147,6 @@ document.getElementById('3-2').onclick = function () {
     history.push(value); 
     generateWinner(thirdHorizontal);
     generateWinner(secondVertical); 
-    console.log('thirdHorizontal', thirdHorizontal);
-    console.log('secondVertical', secondVertical);
   }
 }
 
@@ -183,9 +162,6 @@ document.getElementById('3-3').onclick = function () {
     generateWinner(thirdHorizontal);
     generateWinner(thirdVertical); 
     generateWinner(firstDiagonal);
-    console.log('thirdHorizontal', thirdHorizontal);
-    console.log('thirdVertical', thirdVertical);
-    console.log('firstDiagonal', firstDiagonal);
   }
 }
 
