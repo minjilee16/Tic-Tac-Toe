@@ -1,187 +1,132 @@
-let history = []; 
-let topHorizontal = [];
-let secondHorizontal = [];
-let thirdHorizontal = [];
-let firstVertical = [];
-let secondVertical = [];
-let thirdVertical = [];
-let firstDiagonal = [];
-let secondDiagonal = [];
-// write a function if any of those array has more than 3 same elements either O or X. 
-// then alert who wins. 
-var generateWinner = function (array) {
-  // iterate over topHorizontal array 
-  // if length of array is three and all elements are either all 'O' or 'X'
-  // if it's X then alert X wins 
-  // if it's O then alert O wins
-  if( array.length === 3 && array.indexOf('X') === -1 ) {
-    alert('O wins!'); 
-  } else if ( array.length === 3 && array.indexOf('O') === -1 ) {
-    alert('X wins!');
-  }
-}
-// write a function which generates a value of each box. 
-var getValue = function () {
-  var value = null; 
+const cells = document.querySelectorAll('.cell');
+const one = document.querySelector('.one');
+const two = document.querySelector('.two');
+const three = document.querySelector('.three');
+const four = document.querySelector('.four');
+const five = document.querySelector('.five');
+const six = document.querySelector('.six');
+const seven = document.querySelector('.seven');
+const eight = document.querySelector('.eight');
+const nine = document.querySelector('.nine');
+const playBoard = document.querySelector('.play');
+const resultDiv = document.querySelector('.result');
+const xShape = document.querySelector('.x-win');
+const oShape = document.querySelector('.o-win');
+const reset = document.querySelector('.reset');
+const tieReset = document.querySelector('.tie-reset');
+const winner = document.querySelector('.winner');
+const tieDiv = document.querySelector('.tie');
+let history = [];
+let firstRow = [];
+let secondRow = [];
+let thirdRow = [];
+let firstCol = [];
+let secondCol = [];
+let thirdCol = [];
+let firstDia = [];
+let secondDia = []; 
+
+const clickCells = function () {
   if( history.length === 0 ) {
-    value = "O";
-  } else if ( history[history.length-1] === 'O') {
-    value = 'X'; 
-  } else if ( history[history.length-1] === 'X') {
-    value = 'O';
-  }
-  return value; 
-}
-
-document.getElementById('1-1').onclick = function () {
-  // get inner value 
-  var innerValue = document.getElementById('1-1').innerHTML;
-  // if the inner value is empty then get the value invoking the get value function and set up new value to the box 
-  // push the value to first horizontal line and first vertical line and first diagonal array 
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('1-1').innerHTML = value; 
-    topHorizontal.push(value);
-    firstVertical.push(value);
-    firstDiagonal.push(value); 
-    history.push(value); 
-    generateWinner(topHorizontal);
-    generateWinner(firstVertical);
-    generateWinner(firstDiagonal);
+    this.childNodes[1].classList.add('circle-show');
+    history.push('O');
+  } else if ( history[history.length-1] === "O" && !this.childNodes[1].classList.contains('circle-show')) {
+    this.childNodes[1].classList.remove('circle');
+    this.childNodes[1].classList.add('cross');
+    history.push('X');
+  } else if ( history[history.length-1] === "X"  ) {
+    this.childNodes[1].classList.add('circle-show');
+    history.push('O');
   } 
 }
 
-document.getElementById('1-2').onclick = function () {
-  var innerValue = document.getElementById('1-2').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('1-2').innerHTML = value; 
-    topHorizontal.push(value);
-    secondVertical.push(value);
-    history.push(value); 
-    generateWinner(topHorizontal);
-    generateWinner(secondVertical);
+const insertElement = function (arr) {
+  if( arr.length < 4 ) {
+    arr.push(history[history.length-1]); 
   } 
-}
-
-document.getElementById('1-3').onclick = function () {
-  var innerValue = document.getElementById('1-3').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('1-3').innerHTML = value; 
-    topHorizontal.push(value);
-    thirdVertical.push(value);
-    secondDiagonal.push(value);
-    history.push(value); 
-    generateWinner(topHorizontal); 
-    generateWinner(thirdVertical);
-    generateWinner(secondDiagonal);
+  if ( arr.length === 3 ) {
+    result(arr);
+  }
+  if (history.length === 9 ) {
+    tie();
   }
 }
 
-document.getElementById('2-1').onclick = function () {
-  var innerValue = document.getElementById('2-1').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('2-1').innerHTML = value; 
-    secondHorizontal.push(value);
-    firstVertical.push(value);
-    history.push(value); 
-    generateWinner(firstVertical);
-    generateWinner(secondHorizontal);
+const tie = function () {
+  playBoard.style.display = "none";
+  resultDiv.style.display = "none"
+  tieDiv.style.display = "initial";
+}
+
+const result = function (arr) {
+  if( arr.indexOf('X') === -1 ) {
+    // O wins 
+    playBoard.style.display = "none";
+    resultDiv.style.display = "initial"
+    tieDiv.style.display = "none";
+    xShape.style.display = "none";
+    oShape.style.display = "initial";
+    winner.style.color = "#20C1CE";
+    winner.style.marginTop = "0";
+    winner.style.marginLeft = "0";
+    reset.style.marginLeft = "0";
+  } else if ( arr.indexOf('O') === -1 ) {
+    // x wins
+    playBoard.style.display = "none";
+    resultDiv.style.display = "initial"
+    tieDiv.style.display = "none";
+    xShape.style.display = "initial";
+    oShape.style.display = "none";
+    winner.style.color = "#F56974";
+    winner.style.marginTop = "100px";
+    winner.style.marginLeft = "40px";
+    reset.style.marginLeft = "40px";
   }
 }
 
-document.getElementById('2-2').onclick = function () {
-  var innerValue = document.getElementById('2-2').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('2-2').innerHTML = value; 
-    secondHorizontal.push(value);
-    secondVertical.push(value);
-    secondDiagonal.push(value);
-    firstDiagonal.push(value);
-    history.push(value); 
-    generateWinner(firstDiagonal);
-    generateWinner(secondHorizontal);
-    generateWinner(secondVertical); 
-    generateWinner(secondDiagonal);
-  }
+const restart = function () {
+  resultDiv.style.display = "none";
+  tieDiv.style.display = "none";
+  playBoard.style.display = "inline";
+  cells.forEach( cell => {
+    cell.childNodes[1].classList.add("circle"); 
+    cell.childNodes[1].classList.remove("circle-show","cross");
+  })
+  history = [];
+  firstRow = [];
+  secondRow = [];
+  thirdRow = [];
+  firstCol = [];
+  secondCol = [];
+  thirdCol = [];
+  firstDia = [];
+  secondDia = []; 
 }
 
-document.getElementById('2-3').onclick = function () {
-  var innerValue = document.getElementById('2-3').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('2-3').innerHTML = value; 
-    secondHorizontal.push(value);
-    thirdVertical.push(value);
-    history.push(value); 
-    generateWinner(secondHorizontal);
-    generateWinner(thirdVertical); 
-  }
-}
-
-document.getElementById('3-1').onclick = function () {
-  var innerValue = document.getElementById('3-1').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('3-1').innerHTML = value; 
-    thirdHorizontal.push(value);
-    firstVertical.push(value);
-    secondDiagonal.push(value);
-    history.push(value); 
-    generateWinner(thirdHorizontal);
-    generateWinner(firstVertical); 
-    generateWinner(secondDiagonal);
-  }
-}
-
-document.getElementById('3-2').onclick = function () {
-  var innerValue = document.getElementById('3-2').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('3-2').innerHTML = value; 
-    thirdHorizontal.push(value);
-    secondVertical.push(value);
-    history.push(value); 
-    generateWinner(thirdHorizontal);
-    generateWinner(secondVertical); 
-  }
-}
-
-document.getElementById('3-3').onclick = function () {
-  var innerValue = document.getElementById('3-3').innerHTML;
-  if( innerValue === '' ) {
-    var value = getValue(); 
-    document.getElementById('3-3').innerHTML = value; 
-    thirdHorizontal.push(value);
-    thirdVertical.push(value);
-    firstDiagonal.push(value);
-    history.push(value); 
-    generateWinner(thirdHorizontal);
-    generateWinner(thirdVertical); 
-    generateWinner(firstDiagonal);
-  }
-}
-
-document.getElementById('restart').onclick = function () {
-  document.getElementById('1-1').innerHTML =''; 
-  document.getElementById('1-2').innerHTML =''; 
-  document.getElementById('1-3').innerHTML =''; 
-  document.getElementById('2-1').innerHTML =''; 
-  document.getElementById('2-2').innerHTML =''; 
-  document.getElementById('2-3').innerHTML =''; 
-  document.getElementById('3-1').innerHTML =''; 
-  document.getElementById('3-2').innerHTML =''; 
-  document.getElementById('3-3').innerHTML =''; 
-  history = []; 
-  topHorizontal = [];
-  secondHorizontal = [];
-  thirdHorizontal = [];
-  firstVertical = [];
-  secondVertical = [];
-  thirdVertical = [];
-  firstDiagonal = [];
-  secondDiagonal = [];
-}
+cells.forEach( cell => cell.addEventListener('click', clickCells));
+one.addEventListener('click', function () { insertElement(firstRow) });
+one.addEventListener('click', function () { insertElement(firstCol) });
+one.addEventListener('click', function () { insertElement(firstDia) });
+two.addEventListener('click', function () { insertElement(firstRow) });
+two.addEventListener('click', function () { insertElement(secondCol) });
+three.addEventListener('click', function () { insertElement(firstRow) });
+three.addEventListener('click', function () { insertElement(thirdCol) });
+three.addEventListener('click', function () { insertElement(secondDia) });
+four.addEventListener('click', function () { insertElement(secondRow) });
+four.addEventListener('click', function () { insertElement(firstCol) });
+five.addEventListener('click', function () { insertElement(secondRow) });
+five.addEventListener('click', function () { insertElement(secondCol) });
+five.addEventListener('click', function () { insertElement(firstDia) });
+five.addEventListener('click', function () { insertElement(secondDia) });
+six.addEventListener('click', function () { insertElement(secondRow) });
+six.addEventListener('click', function () { insertElement(thirdCol) });
+seven.addEventListener('click', function () { insertElement(thirdRow) });
+seven.addEventListener('click', function () { insertElement(firstCol) });
+seven.addEventListener('click', function () { insertElement(secondDia) });
+eight.addEventListener('click', function () { insertElement(thirdRow) });
+eight.addEventListener('click', function () { insertElement(secondCol) });
+nine.addEventListener('click', function () { insertElement(thirdRow) });
+nine.addEventListener('click', function () { insertElement(thirdCol) });
+nine.addEventListener('click', function () { insertElement(firstDia) });
+reset.addEventListener('click', restart );
+tieReset.addEventListener('click', restart );
